@@ -21,7 +21,7 @@ const GenerateProduceImageOutputSchema = z.object({
 });
 export type GenerateProduceImageOutput = z.infer<typeof GenerateProduceImageOutputSchema>;
 
-export async function generateProduceImage(input: GenerateProduceImageInput): Promise<GenerateProduceImageOutput> {
+async function generateImage(input: GenerateProduceImageInput): Promise<GenerateProduceImageOutput> {
   const {media} = await ai.generate({
     model: 'googleai/imagen-4.0-fast-generate-001',
     prompt: `a photorealistic image of ${input.produceName}, on a white background`,
@@ -34,11 +34,11 @@ export async function generateProduceImage(input: GenerateProduceImageInput): Pr
   return {imageUrl: media.url};
 }
 
-const generateProduceImageFlow = ai.defineFlow(
+export const generateProduceImage = ai.defineFlow(
   {
     name: 'generateProduceImageFlow',
     inputSchema: GenerateProduceImageInputSchema,
     outputSchema: GenerateProduceImageOutputSchema,
   },
-  generateProduceImage
+  generateImage
 );
