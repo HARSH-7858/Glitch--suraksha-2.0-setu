@@ -4,9 +4,9 @@ export function Hero() {
   return (
     <section className="relative h-[50vh] min-h-[400px] w-full flex items-center justify-center text-center text-white bg-primary/20">
       <Image
-        src="https://picsum.photos/seed/farm/1800/800"
-        alt="A vibrant farm landscape with fresh produce."
-        data-ai-hint="farm landscape"
+        src="https://picsum.photos/seed/indian-produce/1800/800"
+        alt="A beautiful arrangement of fresh Indian vegetables and fruits."
+        data-ai-hint="indian produce"
         fill
         className="object-cover"
       />
