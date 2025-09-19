@@ -1,3 +1,4 @@
+
 export type Farmer = {
   id: string;
   name: string;
@@ -42,6 +43,7 @@ export const produce: Produce[] = [
     name: 'Fresh Basil',
     type: 'herb',
     description: 'Aromatic basil leaves, ideal for pesto, pasta, and garnish.',
+    imageUrl: 'https://picsum.photos/seed/basil/600/400',
     farmerId: 'f1',
   },
   {
@@ -57,6 +59,7 @@ export const produce: Produce[] = [
     name: 'Curly Kale',
     type: 'vegetable',
     description: 'Nutrient-rich kale, perfect for smoothies, salads, or chips.',
+    imageUrl: 'https://picsum.photos/seed/kale/600/400',
     farmerId: 'f2',
   },
   {
@@ -80,6 +83,7 @@ export const produce: Produce[] = [
     name: 'Peppermint',
     type: 'herb',
     description: 'Cool and refreshing mint, perfect for teas, cocktails, and desserts.',
+    imageUrl: 'https://picsum.photos/seed/mint/600/400',
     farmerId: 'f2',
   },
 ];
