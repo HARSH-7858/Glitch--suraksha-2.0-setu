@@ -5,7 +5,9 @@ import type { Produce, Farmer } from '@/lib/data';
 import { ProduceCard } from '@/components/produce-card';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { Apple, Carrot, Leaf, Grape } from 'lucide-react';
+import { Apple, Carrot, Leaf, Grape, PlusCircle } from 'lucide-react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { AddProduceForm } from '@/components/add-produce-form';
 
 type ProduceListingsProps = {
   produce: Produce[];
@@ -45,6 +47,10 @@ export function ProduceListings({ produce: initialProduce, farmers }: ProduceLis
     );
   };
 
+  const handleProduceAdded = (newProduce: Produce) => {
+    setProduceItems(prevItems => [newProduce, ...prevItems]);
+  };
+
   return (
     <div className="space-y-12">
       <div className="text-center space-y-4">
@@ -53,6 +59,20 @@ export function ProduceListings({ produce: initialProduce, farmers }: ProduceLis
           Discover fresh, locally-sourced produce available today from nearby farms.
         </p>
       </div>
+
+       <Accordion type="single" collapsible className="w-full max-w-4xl mx-auto bg-card rounded-lg shadow-sm border">
+        <AccordionItem value="add-produce" className="border-b-0">
+          <AccordionTrigger className="p-6 font-headline text-xl hover:no-underline">
+            <div className="flex items-center gap-3">
+              <PlusCircle className="h-6 w-6 text-primary" />
+              <span>Are you a farmer? Add your produce here.</span>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent className="px-6 pb-6">
+            <AddProduceForm farmers={farmers} onProduceAdded={handleProduceAdded} />
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
       
       <div>
         <div className="flex justify-center items-center gap-2 md:gap-4 pb-8">
