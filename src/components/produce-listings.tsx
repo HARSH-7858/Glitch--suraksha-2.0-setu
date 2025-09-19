@@ -61,23 +61,23 @@ export function ProduceListings({ produce: initialProduce, farmers }: ProduceLis
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-12">
       <div className="text-center space-y-4">
         <h2 className="font-headline text-3xl md:text-5xl text-foreground tracking-tight">Today's Harvest</h2>
         <p className="max-w-2xl mx-auto text-muted-foreground text-lg md:text-xl">
           Discover fresh, locally-sourced produce available today from nearby farms.
         </p>
       </div>
-
-      <Accordion type="single" collapsible className="w-full">
-        <AccordionItem value="item-1">
-          <AccordionTrigger>
+      
+      <Accordion type="single" collapsible className="w-full max-w-4xl mx-auto bg-card rounded-lg shadow-sm border">
+        <AccordionItem value="item-1" className="border-b-0">
+          <AccordionTrigger className="p-6 hover:no-underline">
               <div className="flex items-center gap-3">
                 <PlusCircle className="text-primary"/> 
                 <span className="font-headline text-xl">Are you a farmer? Post new produce</span>
               </div>
           </AccordionTrigger>
-          <AccordionContent>
+          <AccordionContent className="p-6 pt-0">
             <AddProduceForm farmers={farmers} onAddProduce={handleAddProduce} />
           </AccordionContent>
         </AccordionItem>
