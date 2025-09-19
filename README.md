@@ -1,21 +1,21 @@
 # 🌱 Farm-to-Campus Produce Alerter
 
-## 📌 Problem
+## Problem
 Local farmers often have surplus produce that goes unsold, while students want fresh, affordable, local produce. This gap leads to food waste for farmers and missed opportunities for students.
 
-## 💡 Solution
+##  Solution
 Farm-to-Campus Produce Alerter is a simple notification web app where farmers can post daily available produce, and students can easily check what’s fresh and ready to pick up.
 
-## 🎯 MVP Scope
+##  MVP Scope
 - A *static web page* (no backend required).  
 - Displays a list of produce items and daily updates.  
 - Farmers/students can view fresh availability with ease.  
 
-## 🛠 Tech Stack
+##  Tech Stack
 - *Frontend:* HTML, CSS, JavaScript  
 - *Hosting:* GitHub Pages  
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Clone this repository
 ```bash
@@ -35,7 +35,7 @@ Simply open index.html in your browser to view the app locally.
 
 https://your-username.github.io/farm-to-campus-alerter/
 
-## 📸 Features (MVP)
+##  Features (MVP)
 
 [x] Daily produce list display
 
@@ -46,7 +46,7 @@ https://your-username.github.io/farm-to-campus-alerter/
 [ ] Farmer input form (future scope)
 
 
-## 🌍 Future Enhancements
+## Future Enhancements
 
 ✅ Add database support (Supabase / Firebase)
 
