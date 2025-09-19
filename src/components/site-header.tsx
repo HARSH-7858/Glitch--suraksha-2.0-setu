@@ -1,4 +1,5 @@
 import { Logo } from '@/components/icons';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 export function SiteHeader() {
   return (
@@ -9,6 +10,9 @@ export function SiteHeader() {
           <h1 className="font-headline text-2xl md:text-3xl font-bold tracking-tight text-foreground">
             Campus Harvest Alert
           </h1>
+        </div>
+        <div className="flex items-center justify-end">
+          <ThemeToggle />
         </div>
       </div>
     </header>
