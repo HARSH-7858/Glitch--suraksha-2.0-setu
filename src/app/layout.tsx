@@ -1,21 +1,21 @@
 import type { Metadata } from 'next';
-import { Alegreya, Belleza } from 'next/font/google';
+import { Roboto, Roboto_Flex } from 'next/font/google';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/components/theme-provider';
 
-const fontBody = Alegreya({
+const fontBody = Roboto({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-body',
+  weight: ['400', '500', '700'],
 });
 
-const fontHeadline = Belleza({
+const fontHeadline = Roboto_Flex({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-headline',
-  weight: '400',
 });
 
 export const metadata: Metadata = {
