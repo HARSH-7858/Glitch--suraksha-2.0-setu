@@ -23,12 +23,22 @@ export default function Home() {
                   --font-body: 'Alegreya', serif;
               }
 
+              body.dark-mode {
+                  --primary-color: #81a171;
+                  --background-color: #2c2c2c;
+                  --accent-color: #9c7a5f;
+                  --text-color: #f1f1f1;
+                  --card-background: #3a3a3a;
+                  --border-color: #4f4f4f;
+              }
+
               body {
                   font-family: var(--font-body);
                   margin: 0;
                   padding: 0;
                   background-color: var(--background-color);
                   color: var(--text-color);
+                  transition: background-color 0.3s, color 0.3s;
               }
 
               .container {
@@ -57,6 +67,24 @@ export default function Home() {
                   font-family: var(--font-headline);
                   margin: 0;
                   font-size: 2rem;
+              }
+
+              #theme-toggle {
+                  background: none;
+                  border: 2px solid white;
+                  border-radius: 50%;
+                  cursor: pointer;
+                  padding: 8px;
+                  width: 40px;
+                  height: 40px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+              }
+
+              #theme-toggle .icon {
+                  font-size: 1.2rem;
+                  color: white;
               }
 
               main {
@@ -94,6 +122,7 @@ export default function Home() {
                   padding: 0.5rem 1rem;
                   border: 1px solid var(--border-color);
                   background-color: var(--card-background);
+                  color: var(--text-color);
                   border-radius: 20px;
                   cursor: pointer;
                   transition: all 0.2s ease-in-out;
@@ -123,7 +152,7 @@ export default function Home() {
                   border-radius: 12px;
                   overflow: hidden;
                   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-                  transition: transform 0.3s, box-shadow 0.3s;
+                  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, border-color 0.3s;
                   opacity: 0;
                   animation: fadeIn 0.5s ease-out forwards;
               }
@@ -176,6 +205,10 @@ export default function Home() {
               }
               .in-stock { background-color: #E8F5E9; color: #2E7D32; }
               .sold-out { background-color: #FFEBEE; color: #C62828; }
+
+              body.dark-mode .in-stock { background-color: #385b3a; color: #b2d8b5; }
+              body.dark-mode .sold-out { background-color: #792e2e; color: #f1c1c1; }
+
               .sold-out-card {
                   opacity: 0.6;
                   pointer-events: none;
@@ -189,6 +222,10 @@ export default function Home() {
                   color: #555;
                   font-size: 0.9rem;
               }
+              body.dark-mode footer {
+                background-color: #222;
+                color: #aaa;
+              }
 
               @media (max-width: 600px) {
                   header h1 { font-size: 1.5rem; }
@@ -201,6 +238,9 @@ export default function Home() {
           <header>
             <div class="container header-content">
               <h1>🌱 Campus Harvest Alert</h1>
+              <button id="theme-toggle" title="Toggle dark/light mode">
+                <span class="icon">☀️</span>
+              </button>
             </div>
           </header>
 
@@ -276,6 +316,34 @@ export default function Home() {
                       btn.classList.add('active');
                       renderProduce(btn.dataset.filter);
                     });
+                  });
+
+                  // Theme switcher logic
+                  const themeToggle = document.getElementById('theme-toggle');
+                  const themeIcon = themeToggle.querySelector('.icon');
+                  const currentTheme = localStorage.getItem('theme');
+
+                  const setDarkMode = (isDark) => {
+                    if (isDark) {
+                        document.body.classList.add('dark-mode');
+                        themeIcon.textContent = '🌙';
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        document.body.classList.remove('dark-mode');
+                        themeIcon.textContent = '☀️';
+                        localStorage.setItem('theme', 'light');
+                    }
+                  }
+
+                  if (currentTheme === 'dark') {
+                      setDarkMode(true);
+                  } else {
+                      setDarkMode(false);
+                  }
+
+                  themeToggle.addEventListener('click', () => {
+                      const isDarkMode = document.body.classList.contains('dark-mode');
+                      setDarkMode(!isDarkMode);
                   });
               });
           </script>
