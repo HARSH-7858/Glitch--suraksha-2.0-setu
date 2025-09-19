@@ -6,6 +6,7 @@ import { ProduceCard } from '@/components/produce-card';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Apple, Carrot, Leaf, Grape } from 'lucide-react';
+import { AddProduceForm } from '@/components/add-produce-form';
 
 type ProduceListingsProps = {
   produce: Produce[];
@@ -21,9 +22,9 @@ const produceTypes: { name: FilterType, icon: React.ReactNode }[] = [
   { name: 'herb', icon: <Leaf /> },
 ];
 
-export function ProduceListings({ produce, farmers }: ProduceListingsProps) {
+export function ProduceListings({ produce: initialProduce, farmers }: ProduceListingsProps) {
   const [filter, setFilter] = useState<FilterType>('all');
-  const [produceItems, setProduceItems] = useState<Produce[]>(produce);
+  const [produceItems, setProduceItems] = useState<Produce[]>(initialProduce);
 
   const farmerMap = useMemo(() => {
     return farmers.reduce((acc, farmer) => {
@@ -43,6 +44,14 @@ export function ProduceListings({ produce, farmers }: ProduceListingsProps) {
         item.id === produceId ? { ...item, imageUrl } : item
       )
     );
+  };
+  
+  const handleAddProduce = (newProduce: Omit<Produce, 'id' | 'imageUrl'>) => {
+    const newProduceItem: Produce = {
+      ...newProduce,
+      id: `p${produceItems.length + 1}`,
+    };
+    setProduceItems(prevItems => [newProduceItem, ...prevItems]);
   };
 
   return (
@@ -69,6 +78,8 @@ export function ProduceListings({ produce, farmers }: ProduceListingsProps) {
           ))}
         </div>
       </div>
+      
+      <AddProduceForm farmers={farmers} onAddProduce={handleAddProduce} />
       
       {filteredProduce.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
