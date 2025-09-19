@@ -22,7 +22,16 @@ const GenerateProduceImageOutputSchema = z.object({
 export type GenerateProduceImageOutput = z.infer<typeof GenerateProduceImageOutputSchema>;
 
 export async function generateProduceImage(input: GenerateProduceImageInput): Promise<GenerateProduceImageOutput> {
-  return generateProduceImageFlow(input);
+  const {media} = await ai.generate({
+    model: 'googleai/imagen-4.0-fast-generate-001',
+    prompt: `a photorealistic image of ${input.produceName}, on a white background`,
+  });
+
+  if (!media || !media.url) {
+    throw new Error('Failed to generate image for produce.');
+  }
+
+  return {imageUrl: media.url};
 }
 
 const generateProduceImageFlow = ai.defineFlow(
@@ -31,16 +40,5 @@ const generateProduceImageFlow = ai.defineFlow(
     inputSchema: GenerateProduceImageInputSchema,
     outputSchema: GenerateProduceImageOutputSchema,
   },
-  async input => {
-    const {media} = await ai.generate({
-      model: 'googleai/imagen-4.0-fast-generate-001',
-      prompt: `a photorealistic image of ${input.produceName}, on a white background`,
-    });
-
-    if (!media || !media.url) {
-      throw new Error('Failed to generate image for produce.');
-    }
-
-    return {imageUrl: media.url};
-  }
+  generateProduceImage
 );
