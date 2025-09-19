@@ -5,14 +5,7 @@ import type { Produce, Farmer } from '@/lib/data';
 import { ProduceCard } from '@/components/produce-card';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { Apple, Carrot, Leaf, Grape, PlusCircle } from 'lucide-react';
-import { AddProduceForm } from '@/components/add-produce-form';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
+import { Apple, Carrot, Leaf, Grape } from 'lucide-react';
 
 type ProduceListingsProps = {
   produce: Produce[];
@@ -51,14 +44,6 @@ export function ProduceListings({ produce: initialProduce, farmers }: ProduceLis
       )
     );
   };
-  
-  const handleAddProduce = (newProduce: Omit<Produce, 'id' | 'imageUrl'>) => {
-    const newProduceItem: Produce = {
-      ...newProduce,
-      id: `p${produceItems.length + 1}`,
-    };
-    setProduceItems(prevItems => [newProduceItem, ...prevItems]);
-  };
 
   return (
     <div className="space-y-12">
@@ -68,20 +53,6 @@ export function ProduceListings({ produce: initialProduce, farmers }: ProduceLis
           Discover fresh, locally-sourced produce available today from nearby farms.
         </p>
       </div>
-      
-      <Accordion type="single" collapsible className="w-full max-w-4xl mx-auto bg-card rounded-lg shadow-sm border">
-        <AccordionItem value="item-1" className="border-b-0">
-          <AccordionTrigger className="p-6 hover:no-underline">
-              <div className="flex items-center gap-3">
-                <PlusCircle className="text-primary"/> 
-                <span className="font-headline text-xl">Are you a farmer? Post new produce</span>
-              </div>
-          </AccordionTrigger>
-          <AccordionContent className="p-6 pt-0">
-            <AddProduceForm farmers={farmers} onAddProduce={handleAddProduce} />
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
       
       <div>
         <div className="flex justify-center items-center gap-2 md:gap-4 pb-8">
