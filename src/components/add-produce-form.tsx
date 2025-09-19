@@ -134,7 +134,7 @@ export function AddProduceForm({ farmers, onAddProduce }: AddProduceFormProps) {
                   <FormItem>
                     <FormLabel>Price</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., $2.99/lb" {...field} />
+                      <Input placeholder="e.g., ₹150/kg" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -150,7 +150,7 @@ export function AddProduceForm({ farmers, onAddProduce }: AddProduceFormProps) {
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select your farm" />
-                        </SelectTrigger>
+                        </Trigger>
                       </FormControl>
                       <SelectContent>
                         {farmers.map(farmer => (
