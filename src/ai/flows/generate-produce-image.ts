@@ -25,13 +25,6 @@ export async function generateProduceImage(input: GenerateProduceImageInput): Pr
   return generateProduceImageFlow(input);
 }
 
-const generateProduceImagePrompt = ai.definePrompt({
-  name: 'generateProduceImagePrompt',
-  input: {schema: GenerateProduceImageInputSchema},
-  output: {schema: GenerateProduceImageOutputSchema},
-  prompt: `Generate a representative image of the following produce: {{produceName}}. The image should be a photorealistic depiction of the produce. Return the image as a data URI.`,
-});
-
 const generateProduceImageFlow = ai.defineFlow(
   {
     name: 'generateProduceImageFlow',
@@ -41,7 +34,7 @@ const generateProduceImageFlow = ai.defineFlow(
   async input => {
     const {media} = await ai.generate({
       model: 'googleai/imagen-4.0-fast-generate-001',
-      prompt: `Generate a photorealistic image of ${input.produceName}`,
+      prompt: `a photorealistic image of ${input.produceName}, on a white background`,
     });
 
     if (!media || !media.url) {
