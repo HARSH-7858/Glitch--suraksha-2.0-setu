@@ -15,9 +15,9 @@ export function ProduceCard({ produce, farmer, onImageGenerated }: ProduceCardPr
   const imageHint = produce.name.toLowerCase().split(' ').slice(0, 2).join(' ');
 
   return (
-    <Card className="group flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-card/80 backdrop-blur-sm border-white/20">
+    <Card className="group flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-card">
       <CardHeader className="p-0">
-        <div className="aspect-[3/2] w-full overflow-hidden">
+        <div className="aspect-[3/2] w-full overflow-hidden relative">
            <ImageGenerator
             initialImageUrl={produce.imageUrl}
             produceName={produce.name}

@@ -41,32 +41,44 @@ export function ImageGenerator({ initialImageUrl, produceName, imageHint, onImag
     }
   };
 
-  if (isLoading) {
-    return <Skeleton className="w-full h-full" />;
-  }
+  const content = () => {
+    if (isLoading) {
+      return <Skeleton className="w-full h-full" />;
+    }
 
-  if (imageUrl) {
+    if (imageUrl) {
+      return (
+        <div className="relative w-full h-full group/image">
+          <Image
+            src={imageUrl}
+            alt={`Image of ${produceName}`}
+            width={600}
+            height={400}
+            data-ai-hint={imageHint}
+            className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+            unoptimized={imageUrl.startsWith('data:image')}
+          />
+          <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover/image:opacity-100 transition-opacity">
+            <Button onClick={generateImage} disabled={isLoading} variant="secondary">
+              <Sparkles className="mr-2 h-4 w-4" />
+              Generate New Image
+            </Button>
+          </div>
+        </div>
+      );
+    }
+
     return (
-      <Image
-        src={imageUrl}
-        alt={`Image of ${produceName}`}
-        width={600}
-        height={400}
-        data-ai-hint={imageHint}
-        className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-        unoptimized={imageUrl.startsWith('data:image')}
-      />
+      <div className="w-full h-full bg-accent flex flex-col items-center justify-center p-4 text-center">
+          <Sparkles className="h-12 w-12 text-muted-foreground mb-4" />
+          <p className="text-muted-foreground mb-4 font-body">No image available for {produceName}.</p>
+          <Button onClick={generateImage} disabled={isLoading}>
+            <Sparkles className="mr-2 h-4 w-4" />
+            Generate Image
+          </Button>
+      </div>
     );
-  }
+  };
 
-  return (
-    <div className="w-full h-full bg-accent flex flex-col items-center justify-center p-4 text-center">
-        <Sparkles className="h-12 w-12 text-muted-foreground mb-4" />
-        <p className="text-muted-foreground mb-4 font-body">No image available for {produceName}.</p>
-        <Button onClick={generateImage} disabled={isLoading}>
-          <Sparkles className="mr-2 h-4 w-4" />
-          Generate Image
-        </Button>
-    </div>
-  );
+  return <>{content()}</>;
 }
