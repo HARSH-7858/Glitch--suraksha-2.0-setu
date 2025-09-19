@@ -16,11 +16,11 @@ type ProduceListingsProps = {
 
 type FilterType = Produce['type'] | 'all';
 
-const produceTypes: { name: FilterType, icon: React.ReactNode }[] = [
-  { name: 'all', icon: <Grape /> },
-  { name: 'fruit', icon: <Apple /> },
-  { name: 'vegetable', icon: <Carrot /> },
-  { name: 'herb', icon: <Leaf /> },
+const produceTypes: { name: FilterType, icon: React.ElementType }[] = [
+  { name: 'all', icon: Grape },
+  { name: 'fruit', icon: Apple },
+  { name: 'vegetable', icon: Carrot },
+  { name: 'herb', icon: Leaf },
 ];
 
 export function ProduceListings({ produce: initialProduce, farmers }: ProduceListingsProps) {
@@ -54,15 +54,15 @@ export function ProduceListings({ produce: initialProduce, farmers }: ProduceLis
   return (
     <div className="space-y-12">
       <div className="text-center space-y-4">
-        <h2 className="font-headline text-3xl md:text-5xl text-foreground tracking-tight">Today's Harvest</h2>
+        <h2 className="font-headline text-4xl md:text-5xl text-foreground tracking-tight font-bold">Today's Harvest</h2>
         <p className="max-w-2xl mx-auto text-muted-foreground text-lg md:text-xl">
           Discover fresh, locally-sourced produce available today from nearby farms.
         </p>
       </div>
 
-       <Accordion type="single" collapsible className="w-full max-w-4xl mx-auto bg-card rounded-lg shadow-sm">
+       <Accordion type="single" collapsible className="w-full max-w-4xl mx-auto bg-card rounded-2xl shadow-lg border-none">
         <AccordionItem value="add-produce" className="border-b-0">
-          <AccordionTrigger className="p-6 font-headline text-xl hover:no-underline">
+          <AccordionTrigger className="p-6 font-headline text-xl hover:no-underline text-foreground">
             <div className="flex items-center gap-3">
               <PlusCircle className="h-6 w-6 text-primary" />
               <span>Are you a farmer? Add your produce here.</span>
@@ -75,26 +75,26 @@ export function ProduceListings({ produce: initialProduce, farmers }: ProduceLis
       </Accordion>
       
       <div>
-        <div className="flex justify-center items-center gap-2 md:gap-4 pb-8">
-            {produceTypes.map(({ name, icon }) => (
+        <div className="flex justify-center items-center gap-2 md:gap-4 pb-8 md:pb-12">
+            {produceTypes.map(({ name, icon: Icon }) => (
               <Button
                 key={name}
                 variant={filter === name ? 'default' : 'outline'}
+                size="lg"
                 onClick={() => setFilter(name)}
                 className={cn(
-                  "capitalize transition-all duration-200 ease-in-out transform hover:scale-105",
-                  "shadow-sm",
-                   filter !== name && "hover:bg-accent"
+                  "capitalize transition-all duration-300 ease-in-out transform hover:scale-105 rounded-full border-2",
+                  filter === name ? 'bg-primary text-primary-foreground border-primary' : 'bg-transparent border-border'
                 )}
               >
-                {icon}
+                <Icon className="h-5 w-5" />
                 <span className="ml-2 hidden md:inline">{name}</span>
               </Button>
             ))}
           </div>
 
         {filteredProduce.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
             {filteredProduce.map((item) => (
               <ProduceCard
                 key={item.id}
@@ -105,7 +105,7 @@ export function ProduceListings({ produce: initialProduce, farmers }: ProduceLis
             ))}
           </div>
         ) : (
-          <div className="text-center py-16 border-2 border-dashed rounded-lg border-muted-foreground/20 bg-muted/50">
+          <div className="text-center py-20 border-2 border-dashed rounded-2xl border-muted-foreground/20 bg-card">
               <p className="text-muted-foreground text-xl font-body">No produce found for this category. Check back tomorrow!</p>
           </div>
         )}

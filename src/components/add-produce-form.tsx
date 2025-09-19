@@ -23,7 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Leaf, Apple, Carrot } from "lucide-react";
@@ -31,7 +31,7 @@ import { Leaf, Apple, Carrot } from "lucide-react";
 const produceFormSchema = z.object({
   name: z.string().min(2, "Produce name must be at least 2 characters."),
   description: z.string().min(10, "Description must be at least 10 characters."),
-  price: z.string().regex(/^₹\d+(\/\w+)?$/, "Price must be in the format '₹120/kg' or '₹50/bunch'."),
+  price: z.string().regex(/^(₹|\$|€)\d+(\/\w+)?$/, "Price must be in a valid format e.g., '₹120/kg'."),
   type: z.enum(["fruit", "vegetable", "herb"]),
   farmerId: z.string({ required_error: "Please select a farmer." }),
 });
@@ -60,6 +60,7 @@ export function AddProduceForm({ farmers, onProduceAdded }: AddProduceFormProps)
     const newProduce: Produce = {
       id: `p${Date.now()}`,
       ...data,
+      imageUrl: `https://picsum.photos/seed/${data.name.toLowerCase().replace(' ', '-')}/600/400`,
     };
     onProduceAdded(newProduce);
     toast({
@@ -72,9 +73,9 @@ export function AddProduceForm({ farmers, onProduceAdded }: AddProduceFormProps)
   return (
     <Card className="bg-transparent border-none shadow-none">
       <CardHeader className="p-0">
-        <CardDescription>
+        <FormDescription>
           Fill out the form below to add your available produce to the list for students to see.
-        </CardDescription>
+        </FormDescription>
       </CardHeader>
       <CardContent className="p-0 pt-6">
         <Form {...form}>
@@ -132,9 +133,9 @@ export function AddProduceForm({ farmers, onProduceAdded }: AddProduceFormProps)
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="fruit"><div className="flex items-center gap-2"><Apple />Fruit</div></SelectItem>
-                        <SelectItem value="vegetable"><div className="flex items-center gap-2"><Carrot />Vegetable</div></SelectItem>
-                        <SelectItem value="herb"><div className="flex items-center gap-2"><Leaf />Herb</div></SelectItem>
+                        <SelectItem value="fruit"><div className="flex items-center gap-2"><Apple className="h-4 w-4" />Fruit</div></SelectItem>
+                        <SelectItem value="vegetable"><div className="flex items-center gap-2"><Carrot className="h-4 w-4" />Vegetable</div></SelectItem>
+                        <SelectItem value="herb"><div className="flex items-center gap-2"><Leaf className="h-4 w-4" />Herb</div></SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -166,7 +167,7 @@ export function AddProduceForm({ farmers, onProduceAdded }: AddProduceFormProps)
                 </FormItem>
               )}
             />
-            <Button type="submit" size="lg" className="w-full">Add Produce</Button>
+            <Button type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">Add Produce</Button>
           </form>
         </Form>
       </CardContent>

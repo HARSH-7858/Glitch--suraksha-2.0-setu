@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Upload, ImagePlus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { motion } from 'framer-motion';
 
 interface ImageUploaderProps {
   initialImageUrl?: string;
@@ -65,16 +66,15 @@ export function ImageUploader({ initialImageUrl, produceName, imageHint, onImage
           <Image
             src={imageUrl}
             alt={`Image of ${produceName}`}
-            width={600}
-            height={400}
+            fill
             data-ai-hint={imageHint}
-            className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+            className="object-cover w-full h-full transition-transform duration-300 group-hover/image:scale-105"
             unoptimized={imageUrl.startsWith('data:image')}
           />
-          <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover/image:opacity-100 transition-opacity">
-            <Button onClick={triggerFileUpload} variant="secondary">
+          <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover/image:opacity-100 transition-opacity duration-300">
+            <Button onClick={triggerFileUpload} variant="secondary" className="rounded-full">
               <Upload className="mr-2 h-4 w-4" />
-              Upload New Image
+              Change Image
             </Button>
           </div>
         </div>
@@ -82,14 +82,18 @@ export function ImageUploader({ initialImageUrl, produceName, imageHint, onImage
     }
 
     return (
-      <div className="w-full h-full bg-accent flex flex-col items-center justify-center p-4 text-center">
+      <motion.div 
+        className="w-full h-full bg-secondary/50 flex flex-col items-center justify-center p-4 text-center cursor-pointer"
+        onClick={triggerFileUpload}
+        whileHover={{ scale: 1.05 }}
+      >
           <ImagePlus className="h-12 w-12 text-muted-foreground mb-4" />
-          <p className="text-muted-foreground mb-4 font-body">No image available for {produceName}.</p>
-          <Button onClick={triggerFileUpload}>
+          <p className="text-muted-foreground mb-4 font-body">No image for {produceName}.</p>
+          <Button>
             <Upload className="mr-2 h-4 w-4" />
             Upload Image
           </Button>
-      </div>
+      </motion.div>
     );
   };
 
