@@ -22,13 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { PlusCircle } from 'lucide-react';
 
@@ -68,14 +62,10 @@ export function AddProduceForm({ farmers, onAddProduce }: AddProduceFormProps) {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="font-headline text-2xl flex items-center gap-2">
-          <PlusCircle className="text-primary"/>
-          Post New Produce
-        </CardTitle>
+    <Card className="border-none shadow-none">
+      <CardHeader className="pt-2">
         <CardDescription>
-          Are you a farmer? Add your available produce to the list for students to see.
+          Fill out the form below to add your available produce to the list for students to see.
         </CardDescription>
       </CardHeader>
       <CardContent>

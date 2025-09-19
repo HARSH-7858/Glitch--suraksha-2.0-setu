@@ -15,10 +15,10 @@ export function ProduceCard({ produce, farmer, onImageGenerated }: ProduceCardPr
   const imageHint = produce.name.toLowerCase().split(' ').slice(0, 2).join(' ');
 
   return (
-    <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary/50">
-      <CardHeader>
-        <div className="aspect-[3/2] w-full overflow-hidden rounded-t-lg">
-          <ImageGenerator
+    <Card className="group flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-primary/50 hover:-translate-y-1">
+      <CardHeader className="p-0">
+        <div className="aspect-[3/2] w-full overflow-hidden">
+           <ImageGenerator
             initialImageUrl={produce.imageUrl}
             produceName={produce.name}
             imageHint={imageHint}
@@ -26,16 +26,16 @@ export function ProduceCard({ produce, farmer, onImageGenerated }: ProduceCardPr
           />
         </div>
       </CardHeader>
-      <CardContent className="flex-grow space-y-3">
+      <CardContent className="p-6 flex-grow space-y-3">
         <div className="flex justify-between items-start gap-2">
             <CardTitle className="font-headline text-2xl">{produce.name}</CardTitle>
             <Badge variant="secondary" className="capitalize shrink-0">{produce.type}</Badge>
         </div>
         <CardDescription className="font-body text-base">{produce.description}</CardDescription>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="p-6 pt-0">
         <div className="text-sm text-muted-foreground">
-          <p className="font-semibold">{farmer.farm}</p>
+          <p className="font-semibold text-foreground">{farmer.farm}</p>
           <p>Contact: {farmer.name} at {farmer.contact}</p>
         </div>
       </CardFooter>
