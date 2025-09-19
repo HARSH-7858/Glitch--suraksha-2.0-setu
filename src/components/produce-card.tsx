@@ -32,6 +32,7 @@ export function ProduceCard({ produce, farmer, onImageGenerated }: ProduceCardPr
             <Badge variant="secondary" className="capitalize shrink-0">{produce.type}</Badge>
         </div>
         <CardDescription className="font-body text-base">{produce.description}</CardDescription>
+        <p className="font-headline text-xl text-primary font-bold">{produce.price}</p>
       </CardContent>
       <CardFooter className="p-6 pt-0">
         <div className="text-sm text-muted-foreground">

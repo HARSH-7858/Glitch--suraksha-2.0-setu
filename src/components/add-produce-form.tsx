@@ -30,6 +30,7 @@ const produceSchema = z.object({
   name: z.string().min(3, 'Produce name must be at least 3 characters.'),
   description: z.string().min(10, 'Description must be at least 10 characters.'),
   type: z.enum(['fruit', 'vegetable', 'herb']),
+  price: z.string().min(1, 'Price is required.'),
   farmerId: z.string(),
 });
 
@@ -48,6 +49,7 @@ export function AddProduceForm({ farmers, onAddProduce }: AddProduceFormProps) {
       name: '',
       description: '',
       type: 'vegetable',
+      price: '',
       farmerId: farmers[0]?.id || '',
     },
   });
@@ -124,30 +126,45 @@ export function AddProduceForm({ farmers, onAddProduce }: AddProduceFormProps) {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="farmerId"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Your Farm</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="price"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Price</FormLabel>
                     <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your farm" />
-                      </SelectTrigger>
+                      <Input placeholder="e.g., $2.99/lb" {...field} />
                     </FormControl>
-                    <SelectContent>
-                      {farmers.map(farmer => (
-                        <SelectItem key={farmer.id} value={farmer.id}>
-                          {farmer.farm} ({farmer.name})
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="farmerId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Your Farm</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select your farm" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {farmers.map(farmer => (
+                          <SelectItem key={farmer.id} value={farmer.id}>
+                            {farmer.farm} ({farmer.name})
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <Button type="submit">Add Produce</Button>
           </form>
         </Form>

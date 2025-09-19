@@ -13,6 +13,7 @@ export type Produce = {
   description: string;
   imageUrl?: string;
   farmerId: string;
+  price: string;
 };
 
 export const farmers: Farmer[] = [
@@ -29,6 +30,7 @@ export const produce: Produce[] = [
     description: 'Juicy and flavorful tomatoes, perfect for salads and sauces. Grown with organic methods.',
     imageUrl: 'https://picsum.photos/seed/tomato/600/400',
     farmerId: 'f1',
+    price: '$3.99/lb',
   },
   {
     id: 'p2',
@@ -37,6 +39,7 @@ export const produce: Produce[] = [
     description: 'A colorful mix of purple, yellow, and orange carrots. Sweet and crunchy.',
     imageUrl: 'https://picsum.photos/seed/carrots/600/400',
     farmerId: 'f2',
+    price: '$2.50/bunch',
   },
   {
     id: 'p3',
@@ -45,6 +48,7 @@ export const produce: Produce[] = [
     description: 'Aromatic basil leaves, ideal for pesto, pasta, and garnish.',
     imageUrl: 'https://picsum.photos/seed/basil/600/400',
     farmerId: 'f1',
+    price: '$2.00/bunch',
   },
   {
     id: 'p4',
@@ -53,6 +57,7 @@ export const produce: Produce[] = [
     description: 'Crisp and sweet Gala apples, great for snacking or baking.',
     imageUrl: 'https://picsum.photos/seed/apples/600/400',
     farmerId: 'f3',
+    price: '$1.99/lb',
   },
   {
     id: 'p5',
@@ -61,6 +66,7 @@ export const produce: Produce[] = [
     description: 'Nutrient-rich kale, perfect for smoothies, salads, or chips.',
     imageUrl: 'https://picsum.photos/seed/kale/600/400',
     farmerId: 'f2',
+    price: '$3.00/bunch',
   },
   {
     id: 'p6',
@@ -69,6 +75,7 @@ export const produce: Produce[] = [
     description: 'Sweet, sun-ripened strawberries, freshly picked this morning.',
     imageUrl: 'https://picsum.photos/seed/strawberry/600/400',
     farmerId: 'f3',
+    price: '$4.50/pint',
   },
   {
     id: 'p7',
@@ -77,6 +84,7 @@ export const produce: Produce[] = [
     description: 'Versatile summer squash, great for grilling, roasting, or making zoodles.',
     imageUrl: 'https://picsum.photos/seed/zucchini/600/400',
     farmerId: 'f1',
+    price: '$1.50/each',
   },
   {
     id: 'p8',
@@ -85,5 +93,6 @@ export const produce: Produce[] = [
     description: 'Cool and refreshing mint, perfect for teas, cocktails, and desserts.',
     imageUrl: 'https://picsum.photos/seed/mint/600/400',
     farmerId: 'f2',
+    price: '$1.75/bunch',
   },
 ];
