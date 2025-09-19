@@ -70,13 +70,13 @@ export function AddProduceForm({ farmers, onProduceAdded }: AddProduceFormProps)
   };
 
   return (
-    <Card className="border-none shadow-none">
-      <CardHeader className="pt-2">
-        <CardDescription>
+    <Card className="border-none shadow-none bg-transparent">
+      <CardHeader className="pt-2 px-1">
+        <CardDescription className="text-foreground/70">
           Fill out the form below to add your available produce to the list for students to see.
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-1">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
@@ -86,7 +86,7 @@ export function AddProduceForm({ farmers, onProduceAdded }: AddProduceFormProps)
                 <FormItem>
                   <FormLabel>Produce Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g., Heirloom Tomatoes" {...field} />
+                    <Input placeholder="e.g., Heirloom Tomatoes" {...field} className="bg-background/50 border-white/20"/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -99,7 +99,7 @@ export function AddProduceForm({ farmers, onProduceAdded }: AddProduceFormProps)
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Describe the produce..." className="resize-none" {...field} />
+                    <Textarea placeholder="Describe the produce..." className="resize-none bg-background/50 border-white/20" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -113,7 +113,7 @@ export function AddProduceForm({ farmers, onProduceAdded }: AddProduceFormProps)
                   <FormItem>
                     <FormLabel>Price</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., ₹120/kg" {...field} />
+                      <Input placeholder="e.g., ₹120/kg" {...field} className="bg-background/50 border-white/20"/>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -127,7 +127,7 @@ export function AddProduceForm({ farmers, onProduceAdded }: AddProduceFormProps)
                     <FormLabel>Type</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger>
+                        <SelectTrigger className="bg-background/50 border-white/20">
                           <SelectValue placeholder="Select a produce type" />
                         </SelectTrigger>
                       </FormControl>
@@ -150,7 +150,7 @@ export function AddProduceForm({ farmers, onProduceAdded }: AddProduceFormProps)
                   <FormLabel>Farmer</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger>
+                      <SelectTrigger className="bg-background/50 border-white/20">
                         <SelectValue placeholder="Select the farmer" />
                       </SelectTrigger>
                     </FormControl>

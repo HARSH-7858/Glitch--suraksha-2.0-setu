@@ -60,7 +60,7 @@ export function ProduceListings({ produce: initialProduce, farmers }: ProduceLis
         </p>
       </div>
 
-       <Accordion type="single" collapsible className="w-full max-w-4xl mx-auto bg-card rounded-lg shadow-sm border">
+       <Accordion type="single" collapsible className="w-full max-w-4xl mx-auto bg-card/50 backdrop-blur-sm rounded-lg shadow-sm border border-white/10">
         <AccordionItem value="add-produce" className="border-b-0">
           <AccordionTrigger className="p-6 font-headline text-xl hover:no-underline">
             <div className="flex items-center gap-3">
@@ -83,7 +83,8 @@ export function ProduceListings({ produce: initialProduce, farmers }: ProduceLis
                 onClick={() => setFilter(name)}
                 className={cn(
                   "capitalize transition-all duration-200 ease-in-out transform hover:scale-105",
-                  "shadow-sm border-input"
+                  "shadow-sm border-white/20 bg-card/50 backdrop-blur-sm",
+                   filter !== name && "hover:bg-primary/20"
                 )}
               >
                 {icon}
@@ -104,7 +105,7 @@ export function ProduceListings({ produce: initialProduce, farmers }: ProduceLis
             ))}
           </div>
         ) : (
-          <div className="text-center py-16 border-2 border-dashed rounded-lg">
+          <div className="text-center py-16 border-2 border-dashed rounded-lg border-white/10 bg-card/20">
               <p className="text-muted-foreground text-xl font-body">No produce found for this category. Check back tomorrow!</p>
           </div>
         )}
