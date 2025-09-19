@@ -39,7 +39,7 @@ export function ProduceListings({ produce: initialProduce, farmers }: ProduceLis
     return produceItems.filter(p => p.type === filter);
   }, [filter, produceItems]);
 
-  const handleImageGenerated = (produceId: string, imageUrl: string) => {
+  const handleImageUpdated = (produceId: string, imageUrl: string) => {
     setProduceItems(prevItems =>
       prevItems.map(item =>
         item.id === produceId ? { ...item, imageUrl } : item
@@ -100,7 +100,7 @@ export function ProduceListings({ produce: initialProduce, farmers }: ProduceLis
                 key={item.id}
                 produce={item}
                 farmer={farmerMap[item.farmerId]}
-                onImageGenerated={handleImageGenerated}
+                onImageUpdated={handleImageUpdated}
               />
             ))}
           </div>
