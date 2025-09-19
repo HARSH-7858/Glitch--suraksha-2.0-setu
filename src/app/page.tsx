@@ -14,13 +14,13 @@ export default function Home() {
                   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
                   margin: 0;
                   padding: 0;
-                  background-color: #FDFDFB;
+                  background-color: #F5F2E7; /* Off-white */
                   color: #333;
               }
 
               /* Header Styling */
               header {
-                  background-color: #4CAF50; /* A friendly green */
+                  background-color: #A3BE8C; /* Fresh green */
                   color: white;
                   padding: 1.5rem;
                   text-align: center;
@@ -34,7 +34,6 @@ export default function Home() {
               header p {
                   margin: 0.5rem 0 0;
                   font-size: 1.2rem;
-                  font-style: italic;
               }
 
               /* Main Content Section */
@@ -46,7 +45,7 @@ export default function Home() {
               main h2 {
                   text-align: center;
                   font-size: 2rem;
-                  color: #2E7D32; /* A darker green */
+                  color: #B38B6D; /* Earthy brown */
                   margin-bottom: 2rem;
               }
 
@@ -65,6 +64,8 @@ export default function Home() {
                   overflow: hidden;
                   box-shadow: 0 4px 8px rgba(0,0,0,0.05);
                   transition: transform 0.2s, box-shadow 0.2s;
+                  display: flex;
+                  flex-direction: column;
               }
               .produce-card:hover {
                   transform: translateY(-5px);
@@ -77,6 +78,9 @@ export default function Home() {
               }
               .produce-details {
                   padding: 1rem;
+                  flex-grow: 1;
+                  display: flex;
+                  flex-direction: column;
               }
               .produce-details h3 {
                   margin: 0 0 0.5rem;
@@ -86,7 +90,7 @@ export default function Home() {
               .price {
                   font-size: 1.2rem;
                   font-weight: bold;
-                  color: #4CAF50;
+                  color: #A3BE8C;
                   margin-bottom: 0.5rem;
               }
               .availability {
@@ -94,6 +98,7 @@ export default function Home() {
                   padding: 0.3rem 0.6rem;
                   border-radius: 4px;
                   display: inline-block;
+                  margin-top: auto;
               }
               .availability.in-stock {
                   background-color: #E8F5E9; /* Light green */
@@ -137,7 +142,7 @@ export default function Home() {
           <main>
               <h2>Today's Fresh Produce</h2>
               <div id="produce-list">
-                  <!-- Produce items will be injected here by JavaScript -->
+                  <!-- Produce items will be dynamically injected here by JavaScript -->
               </div>
           </main>
 
@@ -152,38 +157,38 @@ export default function Home() {
                   {
                       name: "Organic Apples",
                       price: "$2.50/lb",
-                      image: "https://picsum.photos/seed/apples/400/300",
-                      inStock: true
+                      image_url: "https://picsum.photos/seed/apples/400/300",
+                      availability: true
                   },
                   {
                       name: "Heirloom Tomatoes",
                       price: "$3.00/lb",
-                      image: "https://picsum.photos/seed/tomatoes/400/300",
-                      inStock: true
+                      image_url: "https://picsum.photos/seed/tomatoes/400/300",
+                      availability: true
                   },
                   {
                       name: "Fresh Kale",
                       price: "$1.50/bunch",
-                      image: "https://picsum.photos/seed/kale/400/300",
-                      inStock: false
+                      image_url: "https://picsum.photos/seed/kale/400/300",
+                      availability: false
                   },
                   {
                       name: "Sweet Strawberries",
                       price: "$4.00/quart",
-                      image: "https://picsum.photos/seed/strawberries/400/300",
-                      inStock: true
+                      image_url: "https://picsum.photos/seed/strawberries/400/300",
+                      availability: true
                   },
                   {
                       name: "Rainbow Carrots",
                       price: "$2.00/bunch",
-                      image: "https://picsum.photos/seed/carrots/400/300",
-                      inStock: true
+                      image_url: "https://picsum.photos/seed/carrots/400/300",
+                      availability: true
                   },
                   {
                       name: "Zucchini Squash",
                       price: "$1.00/each",
-                      image: "https://picsum.photos/seed/zucchini/400/300",
-                      inStock: false
+                      image_url: "https://picsum.photos/seed/zucchini/400/300",
+                      availability: false
                   }
               ];
 
@@ -194,18 +199,20 @@ export default function Home() {
               function displayProduce() {
                   const produceListContainer = document.getElementById('produce-list');
                   
+                  if (!produceListContainer) return;
+
                   // Clear any existing content
                   produceListContainer.innerHTML = '';
 
                   // Loop through the data and create a card for each item
                   sampleProduce.forEach(item => {
-                      const availabilityClass = item.inStock ? 'in-stock' : 'sold-out';
-                      const availabilityText = item.inStock ? 'In Stock' : 'Sold Out';
+                      const availabilityClass = item.availability ? 'in-stock' : 'sold-out';
+                      const availabilityText = item.availability ? 'In Stock' : 'Sold Out';
 
                       const card = document.createElement('div');
                       card.className = 'produce-card';
                       card.innerHTML = \`
-                          <img src="\${item.image}" alt="\${item.name}">
+                          <img src="\${item.image_url}" alt="\${item.name}">
                           <div class="produce-details">
                               <h3>\${item.name}</h3>
                               <div class="price">\${item.price}</div>
