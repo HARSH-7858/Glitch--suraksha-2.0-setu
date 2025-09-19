@@ -24,7 +24,6 @@ import {
 } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import { PlusCircle } from 'lucide-react';
 
 const produceSchema = z.object({
   name: z.string().min(3, 'Produce name must be at least 3 characters.'),
@@ -54,14 +53,14 @@ export function AddProduceForm({ farmers, onAddProduce }: AddProduceFormProps) {
     },
   });
 
-  function onSubmit(data: ProduceFormValues) {
+  const onSubmit = (data: ProduceFormValues) => {
     onAddProduce(data);
     form.reset();
     toast({
       title: "Produce Added!",
       description: `${data.name} has been added to the list.`,
     });
-  }
+  };
 
   return (
     <Card className="border-none shadow-none">
@@ -97,7 +96,7 @@ export function AddProduceForm({ farmers, onAddProduce }: AddProduceFormProps) {
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a type" />
-                        </SelectTrigger>
+                        </Trigger>
                       </FormControl>
                       <SelectContent>
                         <SelectItem value="fruit">Fruit</SelectItem>
